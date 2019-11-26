@@ -3,6 +3,7 @@
 
 using namespace std;
 
+extern string answer;
 
 string GetTextFromUser(string prompt)
 {

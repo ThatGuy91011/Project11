@@ -1,7 +1,5 @@
 #include <iostream>
 #include <string>
-#include <cctype>
-#include <stdlib.h>
 #include "Paths.h"
 using namespace std;
 
@@ -16,7 +14,7 @@ int main()
 		if (answer == "a" || answer == "A")
 		{
 			OpenDoor2();
-			if (answer == "a" || answer == "A")
+			if (answer == "a" || answer == "A") 
 			{
 				OpenLeftDoor();
 			}
