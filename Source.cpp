@@ -5,7 +5,7 @@
 #include "Paths.h"
 using namespace std;
 
-string answer;
+string answer; 
 
 int main()
 {
