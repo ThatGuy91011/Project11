@@ -7,89 +7,94 @@ string answer;
 
 int main()
 {
-	Intro();
+
+	Paths object_Paths;
+
+	
+	
+	object_Paths.Intro();
 	if (answer == "a" || answer == "A")
 	{
-		OpenDoor1();
+		object_Paths.OpenDoor1();
 		if (answer == "a" || answer == "A")
 		{
-			OpenDoor2();
+			object_Paths.OpenDoor2();
 			if (answer == "a" || answer == "A") 
 			{
-				OpenLeftDoor();
+				object_Paths.OpenLeftDoor();
 			}
 
 			else if (answer == "b" || answer == "B")
 			{
-				OpenRightDoor();
+				object_Paths.OpenRightDoor();
 			}
 
 			else if (answer == "c" || answer == "C")
 			{
-				OpenStraightDoor();
+				object_Paths.OpenStraightDoor();
 			}
 
 			else if (answer == "d" || answer == "D")
 			{
-				Wait();
+				object_Paths.Wait();
 			}
 			else
 			{
-				Invalid();
+				object_Paths.Invalid();
 			}
 		}
 		else if (answer == "b" || answer == "B")
 		{
-			Wait();
+			object_Paths.Wait();
 		}
 
 		else
 		{
-			Invalid();
+			object_Paths.Invalid();
 		}
 	}
 
 	else if (answer == "b" || answer == "B")
 	{
-		Look();
+		object_Paths.Look();
 		if (answer == "a" || answer == "A")
 		{
-			OpenDoor1();
+			object_Paths.OpenDoor1();
 		}
 
 		else if (answer == "b" || answer == "B")
 		{
-			Keypad();
+			object_Paths.Keypad();
 			if (answer == "a" || answer == "A")
 			{
-				OpenDoor1();
+				object_Paths.OpenDoor1();
 			}
 
 			else if (answer == "b" || answer == "B")
 			{
-				Wait();
+				object_Paths.Wait();
 			}
 		}
 
 		else if (answer == "c" || answer == "C")
 		{
-			Wait();
+			object_Paths.Wait();
 		}
 
 		else
 		{
-			Invalid();
+			object_Paths.Invalid();
 		}
 	}
 
 	else if (answer == "c" || answer == "C")
 	{
-		Wait();
+		object_Paths.Wait();
 	}
 
 	else
 	{
-		Invalid();
+		object_Paths.Invalid();
 	}
 	system("pause");
 	return 0;
