@@ -6,6 +6,11 @@ using namespace std;
 
 extern string answer;
 
+string& name = answer;
+
+int code;
+
+int i;
 string GetTextFromUser(string prompt)
 {
 	string answer = "";
@@ -33,21 +38,23 @@ bool GetNumbersFromUser(string prompt)
 {
 	int code;
 	bool isValid = false;
+	do {
+		cout << "What will you enter? (Enter 0 to exit)" << endl;
+		cout << prompt;
+		cin >> code;
+		if (code == 6180)
+		{
+			isValid = true;
+			return isValid;
+		}
 
-	cout << prompt;
-	cin >> code;
-	if (code == 6180)
-	{
-		isValid = true;
-		return isValid;
-	}
-
-	else
-	{
-		isValid = false;
-		return isValid;
-	}
-
+		else
+		{
+			isValid = false;
+			
+		}
+	} while (code != 0);
+	return isValid;
 }
 void Paths::End1()
 {
@@ -77,7 +84,6 @@ void Paths::TrueEnd()
 string Paths::Keypad()
 {
 	bool code;
-	cout << "What will you enter?" << endl;
 	code = GetNumbersFromUser("I will enter: ");
 	if (code == true)
 	{
@@ -144,6 +150,16 @@ void Paths::Wait()
 }
 string Paths::Intro()
 {
+	cout << "\t\t****Welcome to White Room****" << endl;
+	name = GetTextFromUser("My name is: ");
+	for (i; i < 3; i++)
+	{
+		cout << "Sorry, I didn't quite get that. Once more?" << endl;
+		name = GetTextFromUser("My name is: ");
+	}
+	cout << "Sorry, my mistake. These old systems are a bit laggy." << endl;
+	cout << "Welcome " << answer << ". White Room is a text adventure game where you answer with a letter to indicate your choice. There are multiple endings, but one hidden ending is the true ending." << endl;
+	cout << "Initializing..." << endl << endl << endl;
 	cout << "You find yourself in a room with only one door in front of you. You have no memory of how yo got here. What do you do?" << endl;
 	cout << "A. Open the door\nB. Look around the room some more\nC. Wait" << endl;
 	answer = GetTextFromUser("I choose option: ");
