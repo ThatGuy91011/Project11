@@ -23,8 +23,6 @@ public:
 	void End3();
 	void End4();
 	void TrueEnd();
-
-private:
 	
 };
 

@@ -4,18 +4,22 @@
 
 using namespace std;
 
+//String to hold the player's answer
 extern string answer;
-
+//Reference for inputting the player's name
 string& name = answer;
-
+//Stores the player's input for the code
 int code;
-
+//For for loop
 int i;
+
+//Function to get text from user
 string GetTextFromUser(string prompt)
 {
 	string answer = "";
 	bool isValid = false;
 
+	//This do-while loop checks to make sure the player has entered a valid string
 	do
 	{
 		cout << prompt;
@@ -34,28 +38,36 @@ string GetTextFromUser(string prompt)
 	} while (isValid == false);
 }
 
+//This function gets the code input from the user
 bool GetNumbersFromUser(string prompt)
 {
 	int code;
 	bool isValid = false;
+
+	//This do=while loop has the player continue to enter codes until they get the right one or enter 0
 	do {
 		cout << "What will you enter? (Enter 0 to exit)" << endl;
 		cout << prompt;
 		cin >> code;
+		//If the code is right...
 		if (code == 6180)
 		{
+			//Go on to the True Ending
 			isValid = true;
 			return isValid;
 		}
 
+		//Otherwise...
 		else
 		{
+			//The code is incorrect
 			isValid = false;
-			
 		}
 	} while (code != 0);
 	return isValid;
 }
+
+//Lines 71-95 contain the separate endings for the game
 void Paths::End1()
 {
 	cout << "***Ending 1: Patience is a Virtue...Sometimes***" << endl << "GAME OVER!" << endl << "As you fall through the endless void of the afterlife, a single digit flashes into your mind: 6" << endl;
@@ -81,6 +93,8 @@ void Paths::TrueEnd()
 	cout << "***Ending 5: The End***" << endl << "THANK YOU SO MUCH FOR TO PLAYING MY GAME!";
 	exit(EXIT_FAILURE);
 }
+
+//These functions take the user's answer and apply it back to main for processing
 string Paths::Keypad()
 {
 	bool code;
@@ -98,6 +112,8 @@ string Paths::Keypad()
 		return answer;
 	}
 }
+
+//Tells the player their input was invalid
 void Paths::Invalid()
 {
 	cout << "Sorry, you don't seem to understand how these things work. Goodbye" << endl;
@@ -148,6 +164,8 @@ void Paths::Wait()
 	cout << "You wait." << endl << endl << endl << "And wait." << endl << endl << endl << endl << endl << "And wait....Until you die of starvation." << endl;
 	End1();
 }
+
+//Introduction to the game
 string Paths::Intro()
 {
 	cout << "\t\t****Welcome to White Room****" << endl;

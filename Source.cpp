@@ -11,8 +11,11 @@ int main()
 	Paths object_Paths;
 
 	
-	
+	//Plays the introduction
 	object_Paths.Intro();
+
+	//The entirety of Source.cpp takes the user's answer from Paths.cpp and applies it to the large decision tree laid out here.
+	//Source.cpp is no more than a bunch of if's, then's, and else's. 
 	if (answer == "a" || answer == "A")
 	{
 		object_Paths.OpenDoor1();
