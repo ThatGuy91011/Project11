@@ -16,7 +16,7 @@ int i;
 //Function to get text from user
 string GetTextFromUser(string prompt)
 {
-	string answer = "";
+	string answer;
 	bool isValid = false;
 
 	//This do-while loop checks to make sure the player has entered a valid string
@@ -39,29 +39,49 @@ string GetTextFromUser(string prompt)
 }
 
 //This function gets the code input from the user
-bool GetNumbersFromUser(string prompt)
+int GetNumbersFromUser(string prompt)
 {
 	int code;
-	bool isValid = false;
+	int isValid = 0;
 
 	//This do=while loop has the player continue to enter codes until they get the right one or enter 0
 	do {
 		cout << "What will you enter? (Enter 0 to exit)" << endl;
 		cout << prompt;
 		cin >> code;
-		//If the code is right...
-		if (code == 6180)
+		try
 		{
-			//Go on to the True Ending
-			isValid = true;
-			return isValid;
-		}
+			if (isdigit(code))
+			{
+				//If the code is right...
+				if (code == 6180)
+				{
+					//Go on to the True Ending
+					isValid = 1;
+					return isValid;
+				}
 
-		//Otherwise...
-		else
+				//Otherwise...
+				else
+				{
+					//The code is incorrect
+					isValid = 0;
+					return isValid;
+				}
+			}
+
+			else
+			{
+				throw 2;
+			}
+		}
+		catch (int error)
 		{
-			//The code is incorrect
-			isValid = false;
+			if (error == 2)
+			{
+				isValid = 3;
+				return isValid;
+			}
 		}
 	} while (code != 0);
 	return isValid;
@@ -97,27 +117,29 @@ void Paths::TrueEnd()
 //These functions take the user's answer and apply it back to main for processing
 string Paths::Keypad()
 {
-	bool code;
+	int code;
 	code = GetNumbersFromUser("I will enter: ");
-	if (code == true)
+	if (code == 1)
 	{
 		TrueEnd();
 		return 0;
 	}
-	else
+	else if (code == 0)
 	{
 		cout << "The keypad flashes a red light and the numbers disappear, making sure you can't use it again. You seem to have entered in an incorrect code." << endl;
 		cout << "A. Open the door\nB. Wait" << endl;
 		answer = GetTextFromUser("I choose option: ");
 		return answer;
 	}
+	else
+	{
+		answer = "2";
+		return answer;
+	}
+		
 }
 
-//Tells the player their input was invalid
-void Paths::Invalid()
-{
-	cout << "Sorry, you don't seem to understand how these things work. Goodbye" << endl;
-}
+
 string Paths::OpenDoor1()
 {
 	cout << "You open the door and enter...another room? It looks identical to the first one in every way..." << endl;
@@ -170,12 +192,8 @@ string Paths::Intro()
 {
 	cout << "\t\t****Welcome to White Room****" << endl;
 	name = GetTextFromUser("My name is: ");
-	for (i; i < 3; i++)
-	{
-		cout << "Sorry, I didn't quite get that. Once more?" << endl;
-		name = GetTextFromUser("My name is: ");
-	}
-	cout << "Sorry, my mistake. These old systems are a bit laggy." << endl;
+
+
 	cout << "Welcome " << answer << ". White Room is a text adventure game where you answer with a letter to indicate your choice. There are multiple endings, but one hidden ending is the true ending." << endl;
 	cout << "Initializing..." << endl << endl << endl;
 	cout << "You find yourself in a room with only one door in front of you. You have no memory of how yo got here. What do you do?" << endl;
@@ -183,3 +201,4 @@ string Paths::Intro()
 	answer = GetTextFromUser("I choose option: ");
 	return answer;
 }
+

@@ -2,103 +2,127 @@
 #include <string>
 #include "Paths.h"
 using namespace std;
-
+void Invalid(int error);
 string answer; 
 
 int main()
 {
 
-	Paths object_Paths;
+	Paths path;
 
 	
 	//Plays the introduction
-	object_Paths.Intro();
+	path.Intro();
 
 	//The entirety of Source.cpp takes the user's answer from Paths.cpp and applies it to the large decision tree laid out here.
-	//Source.cpp is no more than a bunch of if's, then's, and else's. 
-	if (answer == "a" || answer == "A")
+	//Source.cpp is no more than a bunch of if's, then's, and else's.
+	try
 	{
-		object_Paths.OpenDoor1();
 		if (answer == "a" || answer == "A")
 		{
-			object_Paths.OpenDoor2();
-			if (answer == "a" || answer == "A") 
+			path.OpenDoor1();
+			if (answer == "a" || answer == "A")
 			{
-				object_Paths.OpenLeftDoor();
+				path.OpenDoor2();
+				if (answer == "a" || answer == "A") 
+				{
+					path.OpenLeftDoor();
+				}
+
+				else if (answer == "b" || answer == "B")
+				{
+					path.OpenRightDoor();
+				}
+
+				else if (answer == "c" || answer == "C")
+				{
+					path.OpenStraightDoor();
+				}
+
+				else if (answer == "d" || answer == "D")
+				{
+					path.Wait();
+				}
+				else
+				{
+					throw 1;
+				}
+			}
+			else if (answer == "b" || answer == "B")
+			{
+				path.Wait();
+			}
+
+			else
+			{
+				throw 1;
+			}
+		}
+
+		else if (answer == "b" || answer == "B")
+		{
+			path.Look();
+			if (answer == "a" || answer == "A")
+			{
+				path.OpenDoor1();
 			}
 
 			else if (answer == "b" || answer == "B")
 			{
-				object_Paths.OpenRightDoor();
+				path.Keypad();
+				if (answer == "a" || answer == "A")
+				{
+					path.OpenDoor1();
+				}
+
+				else if (answer == "b" || answer == "B")
+				{
+					path.Wait();
+				}
+				else if (answer == "2")
+					throw 2;
 			}
 
 			else if (answer == "c" || answer == "C")
 			{
-				object_Paths.OpenStraightDoor();
+				path.Wait();
 			}
 
-			else if (answer == "d" || answer == "D")
-			{
-				object_Paths.Wait();
-			}
 			else
 			{
-				object_Paths.Invalid();
-			}
-		}
-		else if (answer == "b" || answer == "B")
-		{
-			object_Paths.Wait();
-		}
-
-		else
-		{
-			object_Paths.Invalid();
-		}
-	}
-
-	else if (answer == "b" || answer == "B")
-	{
-		object_Paths.Look();
-		if (answer == "a" || answer == "A")
-		{
-			object_Paths.OpenDoor1();
-		}
-
-		else if (answer == "b" || answer == "B")
-		{
-			object_Paths.Keypad();
-			if (answer == "a" || answer == "A")
-			{
-				object_Paths.OpenDoor1();
-			}
-
-			else if (answer == "b" || answer == "B")
-			{
-				object_Paths.Wait();
+				throw 1;
 			}
 		}
 
 		else if (answer == "c" || answer == "C")
 		{
-			object_Paths.Wait();
+			path.Wait();
 		}
 
 		else
 		{
-			object_Paths.Invalid();
+			throw 1;
 		}
 	}
-
-	else if (answer == "c" || answer == "C")
+	catch (int error)
 	{
-		object_Paths.Wait();
-	}
-
-	else
-	{
-		object_Paths.Invalid();
+		Invalid(error);
 	}
 	system("pause");
 	return 0;
+}
+
+void Invalid(int error)
+{
+	if (error == 1)
+	{
+		cout << "\n\t~~~ERROR CODE 1~~~" << endl;;
+		cout << "\n~~~User input invalid answer to choices~~~" << endl;
+	}
+
+	if (error == 2)
+	{
+		cout << "\n\t~~~ERROR CODE 2~~~" << endl;;
+		cout << "\n~~~User did not input a number~~~" << endl;
+	}
 }
