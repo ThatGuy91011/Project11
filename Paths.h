@@ -9,6 +9,7 @@ class Paths
 public:
 	//Prototypes for functions
 	string Intro();
+	string FirstChoice();
 	string OpenDoor1();
 	string OpenDoor2();
 	void OpenRightDoor();
@@ -17,12 +18,11 @@ public:
 	string Look();
 	string Keypad();
 	void Wait();
-	void Invalid();
 	void End1();
 	void End2();
 	void End3();
 	void End4();
-	void TrueEnd();
+	string TrueEnd();
 	
 };
 

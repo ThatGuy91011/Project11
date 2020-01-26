@@ -18,30 +18,45 @@ string GetTextFromUser(string prompt)
 {
 	string answer;
 	bool isValid = false;
+	int strCheck;
 
-	//This do-while loop checks to make sure the player has entered a valid string
-	do
+	try
 	{
-		cout << prompt;
-		cin >> answer;
-		if (answer == "")
-		{
-			cout << "Invalid answer, try again" << endl;
-			isValid = false;
-		}
-		else
-		{
-			isValid = true;
 
-			return answer;
-		}
-	} while (isValid == false);
+		//This do-while loop checks to make sure the player has entered a valid string
+		do
+		{
+			cout << prompt;
+			cin >> answer;
+
+			for (int i = 0; i < answer.length(); i++)
+				if (isdigit(answer[i]) == false)
+					strCheck = 1;
+				else
+					strCheck = 0;
+			if (strCheck == 0)
+			{
+				throw 3;
+			}
+			else
+			{
+				isValid = true;
+
+				return answer;
+			}
+		} while (isValid == false);
+	}
+	catch (int error)
+	{
+		return "3";
+	}
 }
 
 //This function gets the code input from the user
 int GetNumbersFromUser(string prompt)
 {
-	int code;
+	string code;
+	int numCheck;
 	int isValid = 0;
 
 	//This do=while loop has the player continue to enter codes until they get the right one or enter 0
@@ -51,10 +66,19 @@ int GetNumbersFromUser(string prompt)
 		cin >> code;
 		try
 		{
-			if (isdigit(code))
+
+			//Checks each character to see if it is a number
+			for (int i = 0; i < code.length(); i++)
+				if (isdigit(code[i]) == false)
+					numCheck = 0;
+				else
+					numCheck = 1;
+
+			//If the input is indeed a number...
+			if (numCheck == 1)
 			{
 				//If the code is right...
-				if (code == 6180)
+				if (code == "6180")
 				{
 					//Go on to the True Ending
 					isValid = 1;
@@ -69,21 +93,23 @@ int GetNumbersFromUser(string prompt)
 					return isValid;
 				}
 			}
-
+			//If any of the characters is not a number...
 			else
 			{
+				//Error 2
 				throw 2;
 			}
 		}
 		catch (int error)
 		{
+			//Returns the error back to the Keypad function
 			if (error == 2)
 			{
-				isValid = 3;
+				isValid = 2;
 				return isValid;
 			}
 		}
-	} while (code != 0);
+	} while (code != "0");
 	return isValid;
 }
 
@@ -106,12 +132,15 @@ void Paths::End4()
 {
 	cout << "***Ending 4: Meet the Developers***" << endl << "GAME OVER!" << endl << "As you fall through the endless void of the afterlife, a single digit flashes into your mind: 0" << endl;
 }
-void Paths::TrueEnd()
+string Paths::TrueEnd()
 {
 	cout << "A panel above the keypad lowers, revealing another screen that says: " << endl;
 	cout << "Congratulations! You have reached the True Ending! Feel free to quit the game at any time, and thank you for playing!" << endl << endl;
 	cout << "***Ending 5: The End***" << endl << "THANK YOU SO MUCH FOR TO PLAYING MY GAME!";
-	exit(EXIT_FAILURE);
+	cout << "\n\t\t*Would you like to leave a positive review of the game?" << endl;
+	cout << "A. Yes\nB. No" << endl;
+	answer = GetTextFromUser("I choose option: ");
+	return answer;
 }
 
 //These functions take the user's answer and apply it back to main for processing
@@ -121,8 +150,7 @@ string Paths::Keypad()
 	code = GetNumbersFromUser("I will enter: ");
 	if (code == 1)
 	{
-		TrueEnd();
-		return 0;
+		return "TrueEnd";
 	}
 	else if (code == 0)
 	{
@@ -131,6 +159,7 @@ string Paths::Keypad()
 		answer = GetTextFromUser("I choose option: ");
 		return answer;
 	}
+	//Returns the error back to the main function
 	else
 	{
 		answer = "2";
@@ -187,18 +216,20 @@ void Paths::Wait()
 	End1();
 }
 
-//Introduction to the game
-string Paths::Intro()
+string Paths::FirstChoice()
 {
-	cout << "\t\t****Welcome to White Room****" << endl;
-	name = GetTextFromUser("My name is: ");
-
-
 	cout << "Welcome " << answer << ". White Room is a text adventure game where you answer with a letter to indicate your choice. There are multiple endings, but one hidden ending is the true ending." << endl;
 	cout << "Initializing..." << endl << endl << endl;
 	cout << "You find yourself in a room with only one door in front of you. You have no memory of how yo got here. What do you do?" << endl;
 	cout << "A. Open the door\nB. Look around the room some more\nC. Wait" << endl;
 	answer = GetTextFromUser("I choose option: ");
 	return answer;
+}
+//Introduction to the game
+string Paths::Intro()
+{
+	cout << "\t\t****Welcome to White Room****" << endl;
+	name = GetTextFromUser("My name is: ");
+	return name;
 }
 
